@@ -15,6 +15,7 @@ const Quiz = () =>  {
     const [score, setScore] = useState(0);
     const [showNextButton, setShowNextButton] = useState(false);
     const [showScoreModal, setShowScoreModal] = useState(false);
+    const [showSplashScreen, setShowSplashScreen] = useState(true);
 
 
     const renderQuestion = () => {
@@ -257,6 +258,41 @@ const Quiz = () =>  {
         )
     }
 
+    const startQuiz = () => {
+        setShowSplashScreen(false);
+    }
+
+    const renderSplashScreen = () => {
+        return (
+            <Modal
+            animationType="slide"
+            transparent={true}
+            visible={showSplashScreen}>
+            <View style={{
+                flex: 1,
+                backgroundColor: COLORS.white,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Text style={{fontSize: 25, fontWeight: 'bold', paddingBottom: 20}}>Quizzler</Text>
+                <Text style={{fontSize: 15, fontWeight: 'bold', paddingBottom: 40}}>Test your wit!</Text>
+                {/* Start button */}
+                <TouchableOpacity
+                onPress={startQuiz}
+                style={{
+                    backgroundColor: COLORS.accent,
+                    padding: 20, width: '80%', borderRadius: 20
+                }}>
+                    <Text style={{
+                        textAlign: 'center', color: COLORS.white, fontSize: 20
+                    }}>Start Quiz</Text>
+                </TouchableOpacity>
+                </View>
+               </Modal>
+            )
+        
+    }
+
     return (
       <SafeAreaView style = {{flex: 1}}>
         <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
@@ -267,6 +303,10 @@ const Quiz = () =>  {
             backgroundColor: COLORS.background,
             position: 'relative'
             }}>
+
+              {/* Splash screen */}
+              {renderSplashScreen()}
+
               {/* Progress Bar */}
               {renderProgressBar()}
 
