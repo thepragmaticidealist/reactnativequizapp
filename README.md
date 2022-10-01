@@ -1,4 +1,4 @@
-#Quizzler
+# Quizzler
 ## Introduction
 Simple quiz application built using React Native
 
