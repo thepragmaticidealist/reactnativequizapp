@@ -119,6 +119,7 @@ const Quiz = () =>  {
             // If we're at the last question, show the final score
             setShowNextButton(false);
             setShowScoreModal(true);
+            setShowSplashScreen(false);
             
 
         } else {
@@ -129,6 +130,7 @@ const Quiz = () =>  {
             setCorrectOption(null);
             setIsOptionDisabled(false);
             setShowNextButton(false);
+            setShowSplashScreen(false);
 
             console.log('current question index', currentQuestionIndex)
             console.log('current option selected', currentOptionSelected);
@@ -204,7 +206,7 @@ const Quiz = () =>  {
         )
     }
 
-    const renderModal = () => {
+    const renderRetryModal = () => {
         return (
             <Modal
                 animationType="slide"
@@ -252,6 +254,18 @@ const Quiz = () =>  {
                             textAlign: 'center', color: COLORS.white, fontSize: 20
                         }}>Retry Quiz</Text>
                     </TouchableOpacity>
+
+                    {/* Quit button */}
+                    <TouchableOpacity
+                    onPress={quit}
+                    style={{
+                        backgroundColor: COLORS.accent,
+                        padding: 20, width: '100%', borderRadius: 20, margin: 30
+                    }}>
+                        <Text style={{
+                            textAlign: 'center', color: COLORS.white, fontSize: 20
+                        }}>Quit</Text>
+                    </TouchableOpacity>
                     </View>
                    </View>
                </Modal>
@@ -260,6 +274,12 @@ const Quiz = () =>  {
 
     const startQuiz = () => {
         setShowSplashScreen(false);
+        setShowScoreModal(false);
+        restartQuiz();
+    }
+
+    const quit = () => {
+        setShowSplashScreen(true);
     }
 
     const renderSplashScreen = () => {
@@ -320,7 +340,7 @@ const Quiz = () =>  {
               {renderNextButton()}
 
               {/* Show score modal */}
-              {renderModal()}
+              {renderRetryModal()}
 
           </View>
       </SafeAreaView>
